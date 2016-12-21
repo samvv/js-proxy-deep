@@ -2,6 +2,12 @@
 
 const _ = require('lodash') 
 
+function get(obj, path) {
+  if (!path)
+    return obj
+  return _.get(obj, path)
+}
+
 class Node {
 
   constructor(target, traps, path, root) {
@@ -29,17 +35,13 @@ class Node {
       has(oTarget, sPath) {
         return _.has(oTarget, sPath)
       },
-      ownKeys(oTarget, sPath) {
-        const [sParentPath, sKey] = pathPop(sPath)
-        return Object.getOwnPropertyNames(_.get(oTarget, sParentPath), sKey)
-      },
       defineProperty(oTarget, sPath, oDesc) {
         const [sParentPath, sKey] = pathPop(sPath)
-        return Object.defineProperty(_.get(oTarget, sParentPath), sKey, oDesc)
+        return Object.defineProperty(get(oTarget, sParentPath), sKey, oDesc)
       },
       getOwnPropertyDescriptor(oTarget, sPath) {
         const [sParentPath, sKey] = pathPop(sPath)
-        return Object.getOwnPropertyDescriptor(_.get(oTarget, sParentPath), sKey)
+        return Object.getOwnPropertyDescriptor(get(oTarget, sParentPath), sKey)
       }
     })
 
@@ -50,6 +52,7 @@ class Node {
       preventExtensions: traps.preventExtensions,
       apply: traps.apply,
       construct: traps.construct,
+      ownKeys: traps.ownKeys,
 			get: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
@@ -69,11 +72,6 @@ class Node {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
         return traps.enumerate(this.root, newPath.join('.'))
-			},
-			ownKeys: (oTarget, sKey) => {
-        const newPath = _.clone(this.path)
-        newPath.push(sKey)
-        return traps.ownKeys(this.root, newPath.join('.'))
 			},
 			has: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
