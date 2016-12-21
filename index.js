@@ -28,6 +28,7 @@ class Node {
       },
       set(oTarget, sPath, vValue) {
         _.set(oTarget, sPath, vValue)
+        return true
       },
       deleteProperty(oTarget, sPath) {
         _.unset(oTarget, sPath)
