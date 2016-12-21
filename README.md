@@ -30,5 +30,5 @@ emitter.on('access', path => {
   console.log(`${path} was accessed.`)
 })
 
-pp.argv._[0] // trapped!
+pp.argv[0] // trapped!
 ```
