@@ -32,8 +32,3 @@ emitter.on('access', path => {
 
 pp.argv._[0] // trapped!
 ```
-
-## Limitations
-
-Currently, only `get` and `set` traps are implemented.
-
