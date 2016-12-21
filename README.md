@@ -18,7 +18,7 @@ const pp = proxyDeep(process, {
   get(p, path, nest) {
     const val = _.get(p, path)
     if (typeof val !== 'object') {
-      emitter.emit('get', path)
+      emitter.emit('access', path)
       return val
     } else {
       return nest()
