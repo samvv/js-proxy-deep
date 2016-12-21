@@ -44,45 +44,49 @@ class Node {
     })
 
 		this.proxy = new Proxy(target, {
+      getPrototypeOf: traps.getPrototypeOf,
+      setPrototypeOf: traps.setPrototypeOf,
+      isExtensible: traps.isExtensible,
+      preventExtensions: traps.preventExtensions,
 			get: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
-        return traps.get(this.root, newPath, () => new Node({}, traps, newPath, this.root).proxy)
+        return traps.get(this.root, newPath.join('.'), () => new Node({}, traps, newPath, this.root).proxy)
 			},
 			set: (oTarget, sKey, vValue) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
-        return traps.set(this.root, newPath)
+        return traps.set(this.root, newPath.join('.'))
 			},
 			deleteProperty: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
-        return traps.deleteProperty(this.root, newPath)
+        return traps.deleteProperty(this.root, newPath.join('.'))
 			},
 			enumerate: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
-        return traps.enumerate(this.root, newPath)
+        return traps.enumerate(this.root, newPath.join('.'))
 			},
 			ownKeys: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
-        return traps.ownKeys(this.root, newPath)
+        return traps.ownKeys(this.root, newPath.join('.'))
 			},
 			has: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
-        return traps.has(this.root, newPath)
+        return traps.has(this.root, newPath.join('.'))
 			},
 			defineProperty: (oTarget, sKey, oDesc) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
-				return traps.defineProperty(this.root, newPath, oDesc)
+				return traps.defineProperty(this.root, newPath.join('.'), oDesc)
 			},
 			getOwnPropertyDescriptor: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
-        return traps.getOwnPropertyDescriptor(this.root, newPath)
+        return traps.getOwnPropertyDescriptor(this.root, newPath.join('.'))
 			}
 		})
 
