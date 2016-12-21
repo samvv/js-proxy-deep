@@ -7,13 +7,19 @@ object.
 The most simple example imaginable:
 
 ```js
-const o = new DeepProxy(null, {
-  get(target, path) {
-    return 'foo everywhere!'
+const proxyDeep = require('proxy-deep')
+
+const o = proxyDeep({{}, {
+  get(target, path, nest) {
+    if (path[path.length-1] === 'path')
+      return 'foo everywhere!'
+    else
+      return nest()
   }
 })
 
 o.hey.this.is.a.random.path // foo everywhere!
+o.hey.whats.this // object
 ```
 
 ## Limitations
