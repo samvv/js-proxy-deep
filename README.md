@@ -16,3 +16,7 @@ const o = new DeepProxy(null, {
 o.hey.this.is.a.random.path // foo everywhere!
 ```
 
+## Limitations
+
+Currently, only `get` and `set` traps are implemented.
+
