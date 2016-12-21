@@ -2,24 +2,35 @@
 This is a library which enables users to "trap" deeply nested objects into
 [proxies](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
 The API is identical to the proxy API, except that keys are now paths in the
-object.
+object, and that a special `nest()`-procedure is added to the _get_-trap as
+a parameter.
 
-The most simple example imaginable:
+A simple example using Node's [process](https://nodejs.org/api/process.html) object:
 
 ```js
 const proxyDeep = require('proxy-deep')
+const _ = require('lodash')
+const { EventEmitter } = require('events')
 
-const o = proxyDeep({{}, {
-  get(target, path, nest) {
-    if (path[path.length-1] === 'path')
-      return 'foo everywhere!'
-    else
+const emitter = new EventEmitter()
+
+const pp = proxyDeep(process, {
+  get(p, path, nest) {
+    const val = _.get(p, path)
+    if (typeof val !== 'object') {
+      emitter.emit('get', path)
+      return val
+    } else {
       return nest()
+    }
   }
 })
 
-o.hey.this.is.a.random.path // foo everywhere!
-o.hey.whats.this // object
+emitter.on('access', path => {
+  console.log(`${path} was accessed.`)
+})
+
+pp.argv._[0] // trapped!
 ```
 
 ## Limitations
