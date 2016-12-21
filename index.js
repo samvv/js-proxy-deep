@@ -48,6 +48,8 @@ class Node {
       setPrototypeOf: traps.setPrototypeOf,
       isExtensible: traps.isExtensible,
       preventExtensions: traps.preventExtensions,
+      apply: traps.apply,
+      construct: traps.construct,
 			get: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
