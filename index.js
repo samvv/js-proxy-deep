@@ -7,7 +7,7 @@ class Node {
   constructor(target, traps, path, root) {
 
     this.path = path || []
-    this.root = root || this
+    this.root = root || target
 
     function pathPop(path) {
       const chunks = _.toPath(path)
