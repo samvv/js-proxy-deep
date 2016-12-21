@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/OrionGroup/deep-proxy/issues"
   },
-  "homepage": "https://github.com/OrionGroup/deep-proxy#readme"
+  "homepage": "https://github.com/OrionGroup/deep-proxy#readme",
+  "devDependencies": {
+    "chai": "^3.5.0"
+  }
 }
