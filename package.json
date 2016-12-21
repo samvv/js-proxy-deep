@@ -1,0 +1,27 @@
+{
+  "name": "proxy-deep",
+  "version": "1.0.0",
+  "description": "A proxy for deep objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OrionGroup/deep-proxy.git"
+  },
+  "keywords": [
+    "proxy",
+    "javascript",
+    "api",
+    "library",
+    "deep",
+    "nested"
+  ],
+  "author": "Sam Vervaeck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OrionGroup/deep-proxy/issues"
+  },
+  "homepage": "https://github.com/OrionGroup/deep-proxy#readme"
+}
