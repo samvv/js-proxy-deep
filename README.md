@@ -32,3 +32,9 @@ emitter.on('access', path => {
 
 pp.argv[0] // trapped!
 ```
+
+## Contributing
+
+If anyone is willing to write some good tests I would greatly appreciate it.
+Open a pull request and I'll merge when I have the time!
+
