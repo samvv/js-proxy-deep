@@ -6,7 +6,21 @@ object, and that a special `nest()`-procedure is added to the _get_-trap as
 a parameter. The default behavior is to mimick the object that has been passed
 through as first argument.
 
-A simple example using Node's [process](https://nodejs.org/api/process.html) object:
+A simple example for DSL language building: 
+
+```js
+const db = proxyDeep({}, {
+  get(target, path, nest) {
+    return nest()
+  }
+  apply(target, path, thisArg, argumentsList) {
+    return path
+  }
+})
+console.log(db.select.from.where) // outputs ['select', 'from', 'where']
+```
+
+Another example using Node's [process](https://nodejs.org/api/process.html) object:
 
 ```js
 const proxyDeep = require('proxy-deep')
