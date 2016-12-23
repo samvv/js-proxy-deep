@@ -36,11 +36,11 @@ pp.argv[0] // trapped!
 
 ## API
 
-### proxyDeep(target, handlers, opts?)
+### proxyDeep(root, handlers, opts?)
 
 Currently, no additional options are supported.
 
-All handlers are called with the first and second argument `target` and `path`.
+All handlers are called with the first and second argument `root` and `path`.
 The rest is identical to JavaScript's _Proxy_ handler arguments.
 
 ### handlers.get(root, path, reciever)
@@ -51,11 +51,11 @@ A trap for the property accessor.
 
 A trap for the property setter.
 
-### handlers.has(target, path)
+### handlers.has(root, path)
 
 A trap for the `in`-keyword.
 
-### handlers.deleteProperty(target, path) 
+### handlers.deleteProperty(root, path) 
 
 A trap for the `delete` keyword.
 
@@ -67,27 +67,27 @@ A trap for a function application.
 
 A trap for the `new`-keyword.
 
-### handlers.getOwnPropertyDescriptor(target, path)
+### handlers.getOwnPropertyDescriptor(root, path)
 
 A trap for `Object.getOwnPropertyDescriptor()`.
 
-### handlers.ownKeys(target, path)
+### handlers.ownKeys(root, path)
 
 A trap for `Object.getOwnPropertyNames`.
 
-### handler.getPrototypeOf(target, path)
+### handler.getPrototypeOf(root, path)
 
 A trap for `Object.getPrototypeOf()`.
 
-### handler.setPrototypeOf(target, path)
+### handler.setPrototypeOf(root, path)
 
 A trap for `Object.setPrototypeOf()`.
 
-### handler.isExtensible(target, path)
+### handler.isExtensible(root, path)
 
 A trap for `Object.isExtensible()`.
 
-### handler.preventExtensions(target, path)
+### handler.preventExtensions(root, path)
 
 A trap for `Object.preventExtensions()`.
 
