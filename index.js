@@ -23,8 +23,11 @@ class Node {
     }
 
     _.defaults(traps, {
-      get(oTarget, sPath, next) {
-        return _.get(oTarget, sPath)
+      get(oTarget, sPath, nest) {
+        const val = _.get(oTarget, sPath)
+        return (typeof val === 'object' || typeof val === 'string')
+          ? nest()
+          : val
       },
       set(oTarget, sPath, vValue) {
         _.set(oTarget, sPath, vValue)
@@ -43,6 +46,10 @@ class Node {
       getOwnPropertyDescriptor(oTarget, sPath) {
         const [sParentPath, sKey] = pathPop(sPath)
         return Object.getOwnPropertyDescriptor(get(oTarget, sParentPath), sKey)
+      },
+      apply(oTarget, sPath, thisArg, argumentsList) {
+        const fn = _.get(oTarget, sPath)
+        return Function.prototype.apply(thisArg, argumentsList)
       }
     })
 
@@ -51,7 +58,6 @@ class Node {
       setPrototypeOf: traps.setPrototypeOf,
       isExtensible: traps.isExtensible,
       preventExtensions: traps.preventExtensions,
-      apply: traps.apply,
       construct: traps.construct,
       ownKeys: traps.ownKeys,
 			get: (oTarget, sKey) => {
@@ -62,7 +68,7 @@ class Node {
 			set: (oTarget, sKey, vValue) => {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
-        return traps.set(this.root, newPath.join('.'))
+        return traps.set(this.root, newPath.join('.'), vValue)
 			},
 			deleteProperty: (oTarget, sKey) => {
         const newPath = _.clone(this.path)
@@ -88,7 +94,10 @@ class Node {
         const newPath = _.clone(this.path)
         newPath.push(sKey)
         return traps.getOwnPropertyDescriptor(this.root, newPath.join('.'))
-			}
+			},
+      apply: (target, thisArg, argumentsList) => {
+        return traps.apply(this.root, this.path, thisArg, argumentsList)
+      }
 		})
 
 	}
