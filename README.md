@@ -6,6 +6,8 @@ object, and that a special `nest()`-procedure is added to the _get_-trap as
 a parameter. The default behavior is to mimick the object that has been passed
 through as first argument.
 
+## Examples
+
 A simple example for DSL language building: 
 
 ```js
