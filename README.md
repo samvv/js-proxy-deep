@@ -14,7 +14,7 @@ A simple example for DSL language building:
 const db = proxyDeep({}, {
   get(target, path, nest) {
     return nest()
-  }
+  },
   apply(target, path, thisArg, argumentsList) {
     return path
   }
