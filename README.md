@@ -12,7 +12,7 @@ A simple example for DSL language building:
 
 ```js
 const db = proxyDeep({}, {
-  get(target, path, nest) {
+  get(target, path, receiver, nest) {
     return nest()
   },
   apply(target, path, thisArg, argumentsList) {
@@ -59,9 +59,13 @@ Currently, no additional options are supported.
 All handlers are called with the first and second argument `root` and `path`.
 The rest is identical to JavaScript's _Proxy_ handler arguments.
 
-### handlers.get(root, path, reciever)
+### handlers.get(root, path, reciever, nest)
 
-A trap for the property accessor.
+A trap for the property accessor. 
+
+`nest()` is a function that generates a new proxy object with identical
+behaviour to the original proxy. If using `nest()`, you will almost always want
+to return it as a result from this handler.
 
 ### handlers.set(root, path, newValue, receiver)
 
