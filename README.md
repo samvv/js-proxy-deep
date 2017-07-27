@@ -19,7 +19,7 @@ const db = proxyDeep({}, {
     return path
   }
 })
-console.log(db.select.from.where) // outputs ['select', 'from', 'where']
+console.log(db.select.from.where()) // outputs ['select', 'from', 'where']
 ```
 
 Another example using Node's [process](https://nodejs.org/api/process.html) object:
