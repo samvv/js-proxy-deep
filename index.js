@@ -17,7 +17,7 @@ class Node {
 
     function pathPop(path) {
       const parentPath = _.clone(path)
-      const key = chunks[chunks.length-1]
+      const key = path[path.length-1]
       parentPath.pop()
       return [parentPath, key]
     }
