@@ -24,11 +24,32 @@ describe('a proxy supporting deep nesting', () => {
       }
     })
     assert.isDefined(p.bla);
-    assert.isEmpty(p.bla);
     assert.strictEqual(p.bla.baz, 'foo everywhere!');
     assert.strictEqual(p.abla.baaal, 'foo everywhere!');
     assert.strictEqual(p.baaa.baar, 'foo everywhere!');
   })
+
+  it('trap applications', () => {
+    const p = new DeepProxy(function () {}, {
+      apply(target, thisArg, argumentsList) {
+        return 'i was applied!';
+      }
+    })
+    assert.strictEqual(p(), 'i was applied!');
+  });
+
+  it('can nest on applications', () => {
+    const p = new DeepProxy(function () {}, {
+      get() {
+        return this.path;
+      },
+      apply(target, thisArg, argumentsList) {
+        return this.nest(function () {});
+      }
+    })
+    assert.deepEqual(p()()().foo, []);
+  });
+
 
 })
 
