@@ -55,7 +55,7 @@ const keys = {
   getOwnPropertyDescriptor: 1,
 }
 
-function proxyDeep(rootTarget, traps) {
+function DeepProxy(rootTarget, traps) {
 
   function createProxy(target, path) {
     
@@ -101,4 +101,4 @@ function proxyDeep(rootTarget, traps) {
 
 }
 
-module.exports = proxyDeep;
+module.exports = DeepProxy;
