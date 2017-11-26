@@ -1,44 +1,46 @@
 
 This is a library which enables users to "trap" deeply nested objects into
 [proxies](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
-The API is identical to the proxy API, except that keys are now paths in the
-object, and that a special `nest()`-procedure is added to the _get_-trap as
-a parameter. The default behavior is to mimick the object that has been passed
-through as first argument.
+The API is identical to the proxy API, except that traps get an additional
+`this` context with a method for nesting the current proxied object into a
+deeper one.
 
 ## Examples
 
 A simple example for DSL language building: 
 
 ```js
-const db = proxyDeep({}, {
-  get(target, path, receiver, nest) {
-    return nest()
+
+const DeepProxy = require('proxy-deep');
+
+const db = new DeepProxy({}, {
+  get(target, path, receiver) {
+    return this.nest()
   },
   apply(target, path, thisArg, argumentsList) {
-    return path
+    return path;
   }
 })
+
 console.log(db.select.from.where()) // outputs ['select', 'from', 'where']
 ```
 
 Another example using Node's [process](https://nodejs.org/api/process.html) object:
 
 ```js
-const proxyDeep = require('proxy-deep')
-const _ = require('lodash')
+const DeepProxy = require('proxy-deep')
 const { EventEmitter } = require('events')
 
 const emitter = new EventEmitter()
 
-const pp = proxyDeep(process, {
-  get(p, path, nest) {
-    const val = _.get(p, path)
-    if (typeof val !== 'object') {
+const pp = DeepProxy(process, {
+  get(target, key, receiver) {
+    const val = Reflect.get(target, key, receiver);
+    if (typeof val === 'object' && val !== null) {
+      return nest()
+    } else {
       emitter.emit('access', path)
       return val
-    } else {
-      return nest()
     }
   }
 })
@@ -52,67 +54,98 @@ pp.argv[0] // trapped!
 
 ## API
 
-### proxyDeep(root, handlers, opts?)
+### new DeepProxy(target, handlers)
 
-Currently, no additional options are supported.
+Identical to `new Proxy(target, handlers)`, except that the callbacks provided
+in the `traps` object will be called wiith a `this`-context that has some
+additional properties. For a full reference on what arguments are provided to
+the handlers, please consult the a
+[MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler).
 
-All handlers are called with the first and second argument `root` and `path`.
-The rest is identical to JavaScript's _Proxy_ handler arguments.
+### context.rootTarget
 
-### handlers.get(root, path, reciever, nest)
+A reference to the object with wich the nested proxy was created.
 
-A trap for the property accessor. 
+### context.path
 
-`nest()` is a function that generates a new proxy object with identical
-behaviour to the original proxy. If using `nest()`, you will almost always want
-to return it as a result from this handler.
+Holds the full property path to the given object.
 
-### handlers.set(root, path, newValue, receiver)
+### context.nest([nestedTarget])
 
-A trap for the property setter.
+Returns a new proxy that will trap methods as described in this API.
+`nestedTarget` is an optional object with which the proxy will be initialized.
 
-### handlers.has(root, path)
+### handler.getPrototypeOf()
 
-A trap for the `in`-keyword.
+A trap for Object.getPrototypeOf.
 
-### handlers.deleteProperty(root, path) 
+### handler.setPrototypeOf()
 
-A trap for the `delete` keyword.
+A trap for Object.setPrototypeOf.
 
-### handlers.apply(root, path, thisArg, argumentsList)
+### handler.isExtensible()
 
-A trap for a function application.
+A trap for Object.isExtensible.
 
-### handlers.construct(root, path, argumentsList, newTarget)
+### handler.preventExtensions()
 
-A trap for the `new`-keyword.
+A trap for Object.preventExtensions.
 
-### handlers.getOwnPropertyDescriptor(root, path)
+### handler.getOwnPropertyDescriptor()
 
-A trap for `Object.getOwnPropertyDescriptor()`.
+A trap for Object.getOwnPropertyDescriptor.
 
-### handlers.ownKeys(root, path)
+### handler.defineProperty()
 
-A trap for `Object.getOwnPropertyNames`.
+A trap for Object.defineProperty.
 
-### handler.getPrototypeOf(root, path)
+### handler.has()
 
-A trap for `Object.getPrototypeOf()`.
+A trap for the in operator.
 
-### handler.setPrototypeOf(root, path)
+### handler.get()
 
-A trap for `Object.setPrototypeOf()`.
+A trap for getting property values.
 
-### handler.isExtensible(root, path)
+### handler.set()
 
-A trap for `Object.isExtensible()`.
+A trap for setting property values.
 
-### handler.preventExtensions(root, path)
+### handler.deleteProperty()
 
-A trap for `Object.preventExtensions()`.
+A trap for the delete operator.
 
-## Contributing
+### handler.ownKeys()
 
-If anyone is willing to write some good tests I would greatly appreciate it.
-Open a pull request and I'll merge when I have the time!
+A trap for Object.getOwnPropertyNames and Object.getOwnPropertySymbols.
+
+### handler.apply()
+
+A trap for a function call.
+
+### handler.construct()
+
+A trap for the new operator.
+
+## License
+
+Copyright 2017 Sam Vervaeck
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
