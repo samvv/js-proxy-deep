@@ -77,7 +77,11 @@ function DeepProxy(rootTarget, traps) {
             const newPath = push(path, arguments[keyParamIdx]);
 
             // update context for this trap
-            context.nest = function () { return createProxy({}, newPath); }
+            context.nest = function (nestedTarget) {
+              if (nestedTarget === undefined)
+                nestedTarget = {};
+              return createProxy(noop, newPath); 
+            }
 
             return trap.apply(context, arguments);
           }
@@ -86,7 +90,11 @@ function DeepProxy(rootTarget, traps) {
           realTraps[trapName] = function () {
 
             // update context for this trap
-            context.nest = function () { return createProxy({}, newPath); }
+            context.nest = function (nestedTarget) {
+              if (nestedTarget === undefined)
+                nestedTarget = {};
+              return createProxy(nestedTarget, path);
+            }
 
             return trap.apply(context, arguments);
           }
