@@ -1,29 +1,33 @@
 
-const _ = require('lodash')
+const toPath = require('lodash/toPath')
 const assert = require('chai').assert
-const proxyDeep = require('.')
+const DeepProxy = require('.')
 
 describe('a proxy supporting deep nesting', () => {
 
-  it('passes all events by default', () => {
-    const p = proxyDeep({
+  it('transparently mimicks the original object by default', () => {
+    const p = new DeepProxy({
       foo: 'bar',
-      baz: 'bax'
+      baz: 'bax',
+      bla() { return 1 },
     }, {})
-    console.log(p.foo)
-    assert(p.foo === 'bar', 'foo equals bar')
-    assert(p.baz === 'bax', 'baz equals bax')
-    assert(p.bla === undefined, 'unknown property returns undefined')
+    assert.strictEqual(p.foo, 'bar');
+    assert.strictEqual(p.baz, 'bax');
+    assert.strictEqual(p.bla(), 1);
+    assert.isUndefined(p.baa);
   })
 
   it('makes a property of a certain depth return a certain string', () => {
-    const p = proxyDeep({}, {
-      get(target, path, nest) {
-        return (_.toPath(path).length === 2) ? 'foo everywhere!' : nest()
+    const p = new DeepProxy({}, {
+      get(target, key, reciever) {
+        return (this.path.length === 1) ? 'foo everywhere!' : this.nest()
       }
     })
-    assert(typeof p.bla === 'object')
-    assert(p.bla.baz === 'foo everywhere!', 'not equal to expected string')
+    assert.isDefined(p.bla);
+    assert.isEmpty(p.bla);
+    assert.strictEqual(p.bla.baz, 'foo everywhere!');
+    assert.strictEqual(p.abla.baaal, 'foo everywhere!');
+    assert.strictEqual(p.baaa.baar, 'foo everywhere!');
   })
 
 })
