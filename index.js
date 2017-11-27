@@ -74,11 +74,13 @@ function DeepProxy(rootTarget, traps) {
 
           realTraps[trapName] = function () {
 
+            const newPath = arguments[keyParamIdx];
+
             // update context for this trap
             context.nest = function (nestedTarget) {
               if (nestedTarget === undefined)
                 nestedTarget = {};
-              return createProxy(nestedTarget, push(path, arguments[keyParamIdx])); 
+              return createProxy(nestedTarget, push(path, newPath)); 
             }
 
             return trap.apply(context, arguments);
