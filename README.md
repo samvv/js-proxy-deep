@@ -17,8 +17,8 @@ const db = new DeepProxy({}, {
   get(target, path, receiver) {
     return this.nest()
   },
-  apply(target, path, thisArg, argumentsList) {
-    return path;
+  apply(target, thisArg, argList) {
+    return this.path;
   }
 })
 
