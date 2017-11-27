@@ -60,7 +60,7 @@ function DeepProxy(rootTarget, traps) {
   function createProxy(target, path) {
     
     // avoid creating a new object between two traps
-    const context = { rootTarget, path };
+    const context = { rootTarget, path, reset() { path = [] } };
 
     const realTraps = {};
 
