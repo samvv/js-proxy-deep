@@ -64,7 +64,7 @@ the handlers, please consult the a
 
 `options` is an object that can contain the following entries:
 
- - **path** either a string denoting the full path to the object or an array or property keys
+ - **path** either a string denoting the full path to the object or an array of property keys
 
 ### context.rootTarget
 
