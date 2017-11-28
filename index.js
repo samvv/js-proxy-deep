@@ -79,7 +79,7 @@ function DeepProxy(rootTarget, traps, options) {
             // update context for this trap
             context.nest = function (nestedTarget) {
               if (nestedTarget === undefined)
-                nestedTarget = {};
+                nestedTarget = rootTarget;
               return createProxy(nestedTarget, push(path, key)); 
             }
 
