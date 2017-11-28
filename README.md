@@ -37,7 +37,7 @@ const pp = DeepProxy(process, {
   get(target, key, receiver) {
     const val = Reflect.get(target, key, receiver);
     if (typeof val === 'object' && val !== null) {
-      return nest()
+      return nest({})
     } else {
       emitter.emit('access', path)
       return val
@@ -78,6 +78,8 @@ Holds the full property path to the given object.
 
 Returns a new proxy that will trap methods as described in this API.
 `nestedTarget` is an optional object with which the proxy will be initialized.
+If it is not specified, the target that was passed to `new DeepProxy()` will be
+used.
 
 ### handler.getPrototypeOf()
 
