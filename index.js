@@ -55,7 +55,7 @@ const keys = {
   getOwnPropertyDescriptor: 1,
 }
 
-function DeepProxy(rootTarget, traps) {
+function DeepProxy(rootTarget, traps, options) {
 
   function createProxy(target, path) {
     
@@ -105,7 +105,7 @@ function DeepProxy(rootTarget, traps) {
     return new Proxy(target, realTraps);
   }
 
-  return createProxy(rootTarget, []);
+  return createProxy(rootTarget, options !== undefined && typeof options.path !== 'undefined' ? options.path : []);
 
 }
 
