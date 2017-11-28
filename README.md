@@ -54,13 +54,17 @@ pp.argv[0] // trapped!
 
 ## API
 
-### new DeepProxy(target, handlers)
+### new DeepProxy(target, handlers, [options])
 
 Identical to `new Proxy(target, handlers)`, except that the callbacks provided
 in the `traps` object will be called wiith a `this`-context that has some
 additional properties. For a full reference on what arguments are provided to
 the handlers, please consult the a
 [MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler).
+
+`options` is an object that can contain the following entries:
+
+ - **path** either a string denoting the full path to the object or an array or property keys
 
 ### context.rootTarget
 
