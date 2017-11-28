@@ -57,6 +57,8 @@ const keys = {
 
 function DeepProxy(rootTarget, traps, options) {
 
+  const path = options !== undefined && typeof options.path !== 'undefined' ? toPath(options.path) : [];
+
   function createProxy(target, path) {
     
     // avoid creating a new object between two traps
@@ -105,7 +107,7 @@ function DeepProxy(rootTarget, traps, options) {
     return new Proxy(target, realTraps);
   }
 
-  return createProxy(rootTarget, options !== undefined && typeof options.path !== 'undefined' ? options.path : []);
+  return createProxy(rootTarget, path);
 
 }
 
