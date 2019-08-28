@@ -5,6 +5,8 @@ The API is identical to the proxy API, except that traps get an additional
 `this` context with a method for nesting the current proxied object into a
 deeper one.
 
+See the [change log][1] for what's new.
+
 ## Examples
 
 A simple example for DSL language building: 
@@ -37,9 +39,9 @@ const pp = DeepProxy(process, {
   get(target, key, receiver) {
     const val = Reflect.get(target, key, receiver);
     if (typeof val === 'object' && val !== null) {
-      return nest({})
+      return this.nest({})
     } else {
-      emitter.emit('access', path)
+      emitter.emit('access', this.path)
       return val
     }
   }
