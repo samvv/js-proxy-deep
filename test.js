@@ -2,6 +2,7 @@
 const toPath = require('lodash/toPath')
 const assert = require('chai').assert
 const DeepProxy = require('.')
+const { EventEmitter } = require('events')
 
 describe('a proxy supporting deep nesting', () => {
 
@@ -29,7 +30,7 @@ describe('a proxy supporting deep nesting', () => {
     assert.strictEqual(p.baaa.baar, 'foo everywhere!');
   })
 
-  it('trap applications', () => {
+  it('can trap applications', () => {
     const p = new DeepProxy(function () {}, {
       apply(target, thisArg, argumentsList) {
         return 'i was applied!';
@@ -50,6 +51,30 @@ describe('a proxy supporting deep nesting', () => {
     assert.deepEqual(p()()().foo, []);
   });
 
+  it('works on the example in the README', (done) => {
+
+    const emitter = new EventEmitter()
+
+    const pp = DeepProxy(process, {
+      get(target, key, receiver) {
+        const val = Reflect.get(target, key, receiver);
+        if (typeof val === 'object' && val !== null) {
+          return this.nest({})
+        } else {
+          emitter.emit('access', this.path)
+          return val
+        }
+      }
+    })
+
+    emitter.on('access', path => {
+      assert.deepEqual(path, ['argv'])
+      done();
+    })
+
+    pp.argv[0] // trapped!
+
+  })
 
 })
 
