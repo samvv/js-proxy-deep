@@ -1,11 +1,11 @@
 
 This is a library which enables users to "trap" deeply nested objects into
-[proxies](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy).
+[proxies][1].
 The API is identical to the proxy API, except that traps get an additional
 `this` context with a method for nesting the current proxied object into a
 deeper one.
 
-See the [change log][1] for what's new.
+✨ Now updated with support for TypeScript! See the [change log][2] for more information.
 
 ## Examples
 
@@ -62,21 +62,21 @@ Identical to `new Proxy(target, handlers)`, except that the callbacks provided
 in the `traps` object will be called wiith a `this`-context that has some
 additional properties. For a full reference on what arguments are provided to
 the handlers, please consult the a
-[MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler).
+[MDN web docs][3].
 
 `options` is an object that can contain the following entries:
 
  - **path** either a string denoting the full path to the object or an array of property keys
 
-### context.rootTarget
+### this.rootTarget
 
-A reference to the object with wich the nested proxy was created.
+A reference to the object with wich the deep proxy was created.
 
-### context.path
+### this.path
 
 Holds the full property path to the given object.
 
-### context.nest([nestedTarget])
+### this.nest([nestedTarget])
 
 Returns a new proxy that will trap methods as described in this API.
 `nestedTarget` is an optional object with which the proxy will be initialized.
@@ -137,5 +137,9 @@ A trap for the new operator.
 
 ## License
 
-[MIT License - Copyright 2017 Sam Vervaeck](LICENSE)
+The MIT License
+
+[1]: https://github.com/samvv/js-proxy-deep/blob/master/CHANGELOG.md
+[2]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler
 
