@@ -27,20 +27,20 @@ function pathPop(path) {
 
 // names of the traps that can be registered with ES6's Proxy object
 const trapNames = [
-  'getPrototypeOf',
-  'setPrototypeOf',
-  'isExtensible',
-  'preventExtensions',
+  'apply',
   'construct',
-  'ownKeys',
-  'get',
-  'set',
+  'defineProperty',
   'deleteProperty',
   'enumerate',
-  'has',
-  'defineProperty',
+  'get',
   'getOwnPropertyDescriptor',
-  'apply',
+  'getPrototypeOf',
+  'has',
+  'isExtensible',
+  'ownKeys',
+  'preventExtensions',
+  'set',
+  'setPrototypeOf',
 ]
 
 // a list of paramer indexes that indicate that the a recieves a key at that parameter
