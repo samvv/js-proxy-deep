@@ -30,6 +30,35 @@ describe('a proxy supporting deep nesting', () => {
     assert.strictEqual(p.baaa.baar, 'foo everywhere!');
   })
 
+  it('can trap property setters', () => {
+    const p = new DeepProxy({}, {
+      get(target, prop, receiver) {
+        if (prop === 'baz') {
+          return this.path
+        }
+        return this.nest();
+      },
+      set(obj, prop, value) {
+        assert.strictEqual(value, 'bar')
+        assert.deepEqual(this.path, ['foo'])
+      }
+    })
+    p.foo.bar = 'bar'
+  })
+
+  it('can trap the constructor', () => {
+    const p = new DeepProxy(function() {}, {
+      get(target, prop, receiver) {
+        return this.nest(function() {});
+      },
+      construct(target, args) {
+        assert.strictEqual(args[0], 'foo')
+        return { answer: 42 }
+      }
+    })
+    assert.deepEqual(new p.bar.baz('foo'), { answer: 42 })
+  })
+
   it('can trap applications', () => {
     const p = new DeepProxy(function () {}, {
       apply(target, thisArg, argumentsList) {
@@ -77,6 +106,4 @@ describe('a proxy supporting deep nesting', () => {
   })
 
 })
-
-
 
