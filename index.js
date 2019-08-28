@@ -49,7 +49,6 @@ const keys = {
   get: 1,
   set: 1,
   deleteProperty: 1,
-  enumerate: 1,
   has: 1,
   defineProperty: 1,
   getOwnPropertyDescriptor: 1,
