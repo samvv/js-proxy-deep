@@ -139,7 +139,7 @@ A trap for the new operator.
 
 The MIT License
 
-[1]: https://github.com/samvv/js-proxy-deep/blob/master/CHANGELOG.md
-[2]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+[1]: https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+[2]: https://github.com/samvv/js-proxy-deep/blob/master/CHANGELOG.md
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler
 
