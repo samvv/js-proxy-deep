@@ -1,6 +1,6 @@
 
 // Many thanks to @serkanyersen on GitHub for these definitions
-// https://github.com/samvv/js-proxy-deep/issues/7
+// Unfortunately, the related issues have been lost during a cleanup
 
 declare namespace DeepProxy {
 
