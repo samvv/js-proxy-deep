@@ -5,6 +5,7 @@ anadditional `this` context with a method for nesting the current proxied
 object into a deeper one.
 
 ✨ Now updated with support for TypeScript! See the [change log][2] for more information.
+
 🚀 All external dependencies have been stripped, making this library self-contained!
 
 ## Examples
