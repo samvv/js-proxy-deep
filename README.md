@@ -1,11 +1,11 @@
 
 This is a library which enables users to "trap" deeply nested objects into
-[proxies][1].
-The API is identical to the proxy API, except that traps get an additional
-`this` context with a method for nesting the current proxied object into a
-deeper one.
+[proxies][1]. The API is identical to the proxy API, except that traps get
+anadditional `this` context with a method for nesting the current proxied
+object into a deeper one.
 
 ✨ Now updated with support for TypeScript! See the [change log][2] for more information.
+🚀 All external dependencies have been stripped, making this library self-contained!
 
 ## Examples
 

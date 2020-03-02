@@ -1,6 +1,5 @@
 
-const toPath = require('lodash/toPath')
-const assert = require('chai').assert
+const { assert } = require('chai')
 const DeepProxy = require('.')
 const { EventEmitter } = require('events')
 
@@ -28,6 +27,15 @@ describe('a proxy supporting deep nesting', () => {
     assert.strictEqual(p.bla.baz, 'foo everywhere!');
     assert.strictEqual(p.abla.baaal, 'foo everywhere!');
     assert.strictEqual(p.baaa.baar, 'foo everywhere!');
+  })
+
+  it('can configure the start path', () => {
+    const p = new DeepProxy({}, {
+      get(target, prop, receiver) {
+        assert.deepEqual(this.path, ['foo', 'bar', 'baz'])
+      }
+    }, { path: 'foo.bar.baz' });
+    p.bax
   })
 
   it('can trap property setters', () => {

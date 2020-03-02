@@ -1,28 +1,13 @@
 'use strict';
 
-const getDeep = require('lodash/get');
-const toPath = require('lodash/toPath');
-const defaults = require('lodash/defaults');
-const clone = require('lodash/clone');
-const isObjectLike = require('lodash/isObjectLike');
-
-function get(obj, path) {
-  if (!path)
-    return obj;
-  return getDeep(obj, path);
+function parsePath(text) {
+  return text.split('.')
 }
 
 function push(arr, el) {
   const newArr = arr.slice();
   newArr.push(el);
   return newArr;
-}
-
-function pathPop(path) {
-  const parentPath = clone(path);
-  const key = parentPath[parentPath.length-1];
-  parentPath.pop();
-  return [parentPath, key];
 }
 
 // names of the traps that can be registered with ES6's Proxy object
@@ -56,10 +41,14 @@ const keys = {
 
 function DeepProxy(rootTarget, traps, options) {
 
-  const path = options !== undefined && typeof options.path !== 'undefined' ? toPath(options.path) : [];
+  let path = [];
+
+  if (options !== undefined && typeof options.path === 'string') {
+    path = parsePath(options.path)
+  }
 
   function createProxy(target, path) {
-    
+
     // avoid creating a new object between two traps
     const context = { rootTarget, path };
 
