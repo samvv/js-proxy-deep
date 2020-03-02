@@ -1,7 +1,7 @@
 
 This is a library which enables users to "trap" deeply nested objects into
 [proxies][1]. The API is identical to the proxy API, except that traps get
-anadditional `this` context with a method for nesting the current proxied
+an additional `this` context with a method for nesting the current proxied
 object into a deeper one.
 
 ✨ Now updated with support for TypeScript! See the [change log][2] for more information.
@@ -10,7 +10,7 @@ object into a deeper one.
 
 ## Examples
 
-A simple example for DSL language building: 
+A simple example for DSL query building: 
 
 ```js
 
