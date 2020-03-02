@@ -1,14 +1,14 @@
 {
   "name": "proxy-deep",
   "version": "2.2.1",
-  "description": "A proxy for deep objects",
+  "description": "A Proxy object that can nest itself when accessed",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OrionGroup/proxy-deep.git"
+    "url": "git+https://github.com/samvv/js-proxy-deep.git"
   },
   "keywords": [
     "proxy",
@@ -21,9 +21,9 @@
   "author": "Sam Vervaeck",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/OrionGroup/proxy-deep/issues"
+    "url": "https://github.com/samvv/js-proxy-deep/issues"
   },
-  "homepage": "https://github.com/OrionGroup/proxy-deep#readme",
+  "homepage": "https://github.com/samvv/js-proxy-deep#readme",
   "devDependencies": {
     "chai": "^4.1.2"
   },
