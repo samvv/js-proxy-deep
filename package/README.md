@@ -57,11 +57,11 @@ pp.argv[0] // trapped!
 
 ## API
 
-```
+```js
 import DeepProxy from "proxy-deep"
 ```
 
-```
+```js
 import { DeepProxy, TrapThisArgument, DeepProxyHandler } from "proxy-deep"
 ```
 
