@@ -42,15 +42,20 @@ const keys = {
 function DeepProxy(rootTarget, traps, options) {
 
   let path = [];
+  let userData = {};
 
-  if (options !== undefined && typeof options.path === 'string') {
+  if (options !== undefined && typeof options.path !== 'undefined') {
     path = parsePath(options.path)
+  }
+  if (options !== undefined && typeof options.userData !== 'undefined') {
+    userData = options.userData
   }
 
   function createProxy(target, path) {
 
     // avoid creating a new object between two traps
     const context = { rootTarget, path };
+    Object.assign(context, userData);
 
     const realTraps = {};
 

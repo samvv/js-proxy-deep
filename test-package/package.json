@@ -1,0 +1,12 @@
+{
+  "name": "test-package",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A package to test the TypeScript definition files of 'proxy-deep'",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsc"
+  },
+  "author": "Sam Vervaeck <samvv@pm.me>",
+  "license": "MIT"
+}
