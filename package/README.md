@@ -57,7 +57,15 @@ pp.argv[0] // trapped!
 
 ## API
 
-### TrapThisArgument<T>
+```
+import DeepProxy from "proxy-deep"
+```
+
+```
+import { DeepProxy, TrapThisArgument, DeepProxyHandler } from "proxy-deep"
+```
+
+### TrapThisArgument&lt;T&gt;
 
 A TypeScript type that holds all information about the `this` argument inside a
 proxy trap.
