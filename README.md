@@ -16,6 +16,8 @@ or
 yarn add proxy-deep
 ```
 
+The documentation [can be found here](https://github.com/samvv/js-proxy-deep/tree/master/package).
+
 ## License
 
 All code in this repository is MIT-licensed.
