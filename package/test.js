@@ -113,5 +113,18 @@ describe('a proxy supporting deep nesting', () => {
 
   })
 
+  it('can pass arbitrary user data to this', (done) => {
+
+    const p = new DeepProxy({}, {
+      get(target, key, receiver) {
+        assert(this.foo === true);
+        done();
+      }
+    }, { userData: { foo: true } });
+
+    p.bla
+
+  })
+
 })
 
