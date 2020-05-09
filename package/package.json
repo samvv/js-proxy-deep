@@ -4,7 +4,8 @@
   "description": "A Proxy object that can nest itself when accessed",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test-types": "tsc"
   },
   "repository": {
     "type": "git",
