@@ -4,6 +4,7 @@
   "description": "A Proxy object that can nest itself when accessed",
   "main": "index.js",
   "scripts": {
+    "prepare": "tsc",
     "test": "mocha",
     "test-types": "tsc"
   },
@@ -27,7 +28,7 @@
   "homepage": "https://github.com/samvv/js-proxy-deep#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^7.1.2"
+    "mocha": "^8.2.1"
   },
   "dependencies": {}
 }
