@@ -88,7 +88,25 @@ describe('a proxy supporting deep nesting', () => {
     assert.deepEqual(p()()().foo, []);
   });
 
-  it('works on the example in the README', (done) => {
+
+  it('works on the first example in the README', () => {
+
+    const DeepProxy = require('proxy-deep');
+
+    const db = new DeepProxy({}, {
+      get(target, path, receiver) {
+        return this.nest(function () { })
+      },
+      apply(target, thisArg, argList) {
+        return this.path;
+      }
+    })
+
+    assert.deepEqual(db.select.from.where(), ['select', 'from', 'where']);
+
+  });
+
+  it('works on the second example in the README', (done) => {
 
     const emitter = new EventEmitter()
 
