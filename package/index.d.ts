@@ -25,9 +25,14 @@ export interface TrapThisArgument<T extends object> {
   rootTarget: T; 
 }
 
+export interface DeepProxyOptions {
+    path?: string[];
+    userData?: { [key: string]: any };
+}
+
 export interface DeepProxyConstructor {
-  revocable<T extends object>(target: T, handler: DeepProxyHandler<T>): { proxy: T; revoke: () => void; };
-  new <T extends object>(target: T, handler: DeepProxyHandler<T>): T;
+  //revocable<T extends object>(target: T, handler: DeepProxyHandler<T>): { proxy: T; revoke: () => void; };
+  new <T extends object>(target: T, handler: DeepProxyHandler<T>, options?: DeepProxyOptions): T;
 }
 
 export declare const DeepProxy: DeepProxyConstructor;
