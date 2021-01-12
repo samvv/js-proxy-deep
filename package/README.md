@@ -13,12 +13,11 @@ object into a deeper one.
 A simple example for DSL query building: 
 
 ```js
-
 const DeepProxy = require('proxy-deep');
 
 const db = new DeepProxy({}, {
   get(target, path, receiver) {
-    return this.nest()
+    return this.nest(function () {})
   },
   apply(target, thisArg, argList) {
     return this.path;
