@@ -5,6 +5,12 @@ This document keeps track of all changes made to the library over time. If
 updated your dependencies and the library suddenly stopped working, this change
 log might be of help.
 
+## v3.1.0
+
+ - Removed unsupported `DeepProxy.revocable` from typings
+ - Fixed example in README.md
+ - Updated development dependencies
+
 ## v3.0.0
 
  - Updated the TypeScript definitions file to be a regular module, so it is
