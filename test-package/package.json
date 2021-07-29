@@ -7,6 +7,6 @@
   "scripts": {
     "test": "tsc"
   },
-  "author": "Sam Vervaeck <samvv@pm.me>",
+  "author": "Sam Vervaeck",
   "license": "MIT"
 }

@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/samvv/js-proxy-deep.git"
   },
-  "author": "Sam Vervaeck <samvv@pm.me>",
+  "author": "Sam Vervaeck",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/samvv/js-proxy-deep/issues"

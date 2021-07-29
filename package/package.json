@@ -20,15 +20,15 @@
     "deep",
     "nested"
   ],
-  "author": "Sam Vervaeck <samvv@pm.me>",
+  "author": "Sam Vervaeck",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/samvv/js-proxy-deep/issues"
   },
   "homepage": "https://github.com/samvv/js-proxy-deep#readme",
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^8.2.1"
+    "chai": "^4.3.4",
+    "mocha": "^9.0.3"
   },
   "dependencies": {}
 }
