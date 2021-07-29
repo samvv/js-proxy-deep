@@ -5,6 +5,10 @@ This document keeps track of all changes made to the library over time. If
 updated your dependencies and the library suddenly stopped working, this change
 log might be of help.
 
+## v3.1.1
+
+ - Fixed a broken hyperlink in the README
+
 ## v3.1.0
 
  - Removed unsupported `DeepProxy.revocable` from typings
