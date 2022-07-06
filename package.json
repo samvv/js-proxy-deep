@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/samvv/js-proxy-deep#readme",
   "devDependencies": {
-    "concurrently": "^6.2.0"
+    "concurrently": "^7.2.2"
   }
 }
