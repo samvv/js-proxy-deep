@@ -2,17 +2,22 @@
   "name": "test-package",
   "private": true,
   "version": "1.0.0",
-  "description": "A package to test the TypeScript definition files of 'proxy-deep'",
-  "main": "index.js",
+  "description": "A package to test the CommonJS definitions of 'proxy-deep'",
+  "type": "module",
   "scripts": {
-    "test": "tsc"
+    "prepare": "tsc",
+    "test": "mocha"
   },
   "author": "Sam Vervaeck",
   "license": "MIT",
   "dependencies": {
-    "proxy-deep": "^3.1.1"
+    "proxy-deep": "^4.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.0.4"
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
+    "chai": "^5.1.0",
+    "mocha": "^10.3.0",
+    "typescript": "^5.3.3"
   }
 }

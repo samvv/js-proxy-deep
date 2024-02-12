@@ -1,4 +1,3 @@
-'use strict';
 
 function parsePath(text) {
   return text.split('.')
@@ -16,7 +15,7 @@ const trapNames = [
   'construct',
   'defineProperty',
   'deleteProperty',
-  'enumerate',
+  'enumerate', // deprecated
   'get',
   'getOwnPropertyDescriptor',
   'getPrototypeOf',
@@ -39,7 +38,7 @@ const keys = {
   getOwnPropertyDescriptor: 1,
 }
 
-function DeepProxy(rootTarget, traps, options) {
+export function DeepProxy(rootTarget, traps, options) {
 
   let path = [];
   let userData = {};
@@ -104,4 +103,4 @@ function DeepProxy(rootTarget, traps, options) {
 
 }
 
-module.exports = DeepProxy;
+export default DeepProxy;

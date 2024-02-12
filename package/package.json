@@ -1,11 +1,14 @@
 {
   "name": "proxy-deep",
-  "version": "3.1.1",
+  "version": "4.0.0",
   "description": "A Proxy object that can nest itself when accessed",
-  "main": "index.js",
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.js"
+  },
   "scripts": {
     "prepare": "tsc",
-    "test": "mocha",
+    "test": "mocha test.mjs",
     "test-types": "tsc"
   },
   "repository": {
@@ -27,8 +30,8 @@
   },
   "homepage": "https://github.com/samvv/js-proxy-deep#readme",
   "devDependencies": {
-    "chai": "^4.3.7",
-    "mocha": "^10.2.0",
-    "typescript": "^5.0.4"
+    "chai": "^5.1.0",
+    "mocha": "^10.3.0",
+    "typescript": "^5.3.3"
   }
 }

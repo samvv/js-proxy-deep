@@ -8,7 +8,7 @@
     "test-package"
   ],
   "scripts": {
-    "test": "concurrently 'yarn run --cwd=package test-types' 'yarn run --cwd=package test' 'yarn run --cwd=test-package test'"
+    "test": "concurrently 'npm run -w=package test' 'npm run -w=test-package test-cjs' 'npm run -w=test-package test-esm'"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/samvv/js-proxy-deep#readme",
   "devDependencies": {
-    "concurrently": "^8.0.1"
+    "concurrently": "^8.2.2"
   }
 }

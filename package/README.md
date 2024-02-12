@@ -155,6 +155,30 @@ A trap for a function call.
 
 A trap for the new operator.
 
+## FAQ
+
+### I get an error `foo is not a function`!
+
+You must pass a fuction as the object to be proxied if you want `traps.apply` to work, like so:
+
+```js
+const proxy = new DeepProxy(function () {}, {
+    apply() {
+        return 42;
+    }
+});
+```
+
+## Change Log
+
+### 4.0.0
+
+ - Moved to ESM exports. CommonJS imports are no longer supported. While you
+   are moving your code to ESM, you can stil use version 3.1.1 of this library,
+   which is almost identical.
+
+_Older versions of this package did not have a change log._
+
 ## License
 
 The MIT License
