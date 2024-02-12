@@ -5,6 +5,15 @@ This document keeps track of all changes made to the library over time. If
 updated your dependencies and the library suddenly stopped working, this change
 log might be of help.
 
+## 4.0.0
+
+ - Moved to ESM exports. CommonJS imports are no longer supported. While you
+   are moving your code to ESM, you can stil use version 3.1.1 of this library,
+   which is almost identical.
+ - Updated development dependencies
+ - Added automated end-to-end test
+ - Added small FAQ to README.md
+
 ## v3.1.1
 
  - Fixed a broken hyperlink in the README

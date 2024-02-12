@@ -169,16 +169,6 @@ const proxy = new DeepProxy(function () {}, {
 });
 ```
 
-## Change Log
-
-### 4.0.0
-
- - Moved to ESM exports. CommonJS imports are no longer supported. While you
-   are moving your code to ESM, you can stil use version 3.1.1 of this library,
-   which is almost identical.
-
-_Older versions of this package did not have a change log._
-
 ## License
 
 The MIT License
