@@ -5,6 +5,11 @@ This document keeps track of all changes made to the library over time. If
 updated your dependencies and the library suddenly stopped working, this change
 log might be of help.
 
+## 4.0.1
+
+ - Fixed `package.json` to export the right source file as entry point for this
+   library.
+
 ## 4.0.0
 
  - Moved to ESM exports. CommonJS imports are no longer supported. While you
